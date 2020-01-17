@@ -32,6 +32,30 @@ public class Ball {
 		g2d.fillOval(POSITION_X, POSITION_Y, BALL_WIDTH, BALL_HEIGHT);
 	}
 	
+	public int getVELX() {
+		return VELOCITY_X;
+	}
+	
+	public int getVELY() {
+		return VELOCITY_Y;
+	}
+	
+	public int getPOSX() {
+		return POSITION_X;
+	}
+	
+	public int getPOSY() {
+		return POSITION_Y;
+	}
+	
+	public int getBallWidth() {
+		return BALL_WIDTH;
+	}
+	
+	public int getBallHeight() {
+		return BALL_HEIGHT;
+	}
+	
 	public void setVELX(int velX) {
 		VELOCITY_X = velX;
 	}
