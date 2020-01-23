@@ -3,6 +3,8 @@ package test;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.MouseInfo;
+import java.awt.Point;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -49,8 +51,12 @@ public class Main extends JPanel {
 			ball.setVELY(-ball_vely);
 		}
 		
-		if (ball_posy == bar_height && bar_left <= ball_posx - ball_width/2 && ball_posx <= bar_right + ball_width/2 ) {
-			ball.setVELY(-ball_vely);
+		//if (ball_posy == bar_height && ball_posx >= bar_left - ball_width/2 && ball_posx <= bar_right + ball_width/2 ) {
+		//	ball.setVELY(-ball_vely);
+		//}
+		
+		if (ball_posy == bar_height) {
+			
 		}
 	}
 	
@@ -65,6 +71,8 @@ public class Main extends JPanel {
 	public void updateBar() {
 		bar_left = bar.getPOSX();
 		bar_right = bar.getPOSX() + bar.getBarWidth();
+		Point p = MouseInfo.getPointerInfo().getLocation();
+		bar.setPOSX(p.x);
 	}
 	
 	public void newGame() {
@@ -98,9 +106,10 @@ public class Main extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		main.newGame();
 		
+		
 		while (true) {
-			main.updateBall();
 			main.updateBar();
+			main.updateBall();
 			main.repaint();
 			Thread.sleep(10);
 		}
