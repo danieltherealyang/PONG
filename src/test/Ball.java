@@ -9,24 +9,17 @@ public class Ball {
 	private int POSITION_Y;
 	private final int BALL_WIDTH = 30;
 	private final int BALL_HEIGHT = 30;
+	private boolean dead = false;
 	private Main main;
 	
 	public Ball(Main main) {
 		this.main = main;
 	}
 	
-	public void newGame() {
-		VELOCITY_X = 1;
-		VELOCITY_Y = 1;
-		POSITION_X = 0;
-		POSITION_Y = 0;
-	}
-	
 	public void moveBall() {
 		POSITION_X = POSITION_X + VELOCITY_X;
 		POSITION_Y = POSITION_Y + VELOCITY_Y;
 	}
-	
 	
 	public void paint(Graphics2D g2d) {
 		g2d.fillOval(POSITION_X, POSITION_Y, BALL_WIDTH, BALL_HEIGHT);
