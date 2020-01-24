@@ -29,6 +29,13 @@ public class Main extends JPanel {
 	int bar_left;
 	int bar_right;
 	int bar_height = FRAME_HEIGHT - 50 - ball_width;
+	static public int score = -1;
+	JLabel L;
+	
+	public Main() {
+		L = new JLabel("Score: 0");
+		add(L);
+	}
 	
 	@Override
 	public void paint (Graphics g) {
@@ -53,12 +60,26 @@ public class Main extends JPanel {
 			ball.setVELY(-ball_vely);
 		}
 		
-		if (ball_posy == bar_height && ball_posx >= bar_left + ball_width/2 && ball_posx <= bar_right - ball_width/2 ) {
+		if (ball_posy == bar_height && ball_posx >= bar_left + ball_width/4 && ball_posx <= bar_right - ball_width/4 ) {
 			ball.setVELY(-ball_vely);
+		}
+		
+		if (ball_velx > 0 && ball_posy == bar_height && ball_posx <= bar_left + ball_width/4 && ball_posx >= bar_left - ball_width) {
+			ball.setVELY(-ball_vely);
+			ball.setVELX(-ball_velx);
+		}
+		
+		if (ball_velx < 0 && ball_posy == bar_height && ball_posx <= bar_right + ball_width && ball_posx >= bar_right - ball_width/4) {
+			ball.setVELY(-ball_vely);
+			ball.setVELX(-ball_velx);
 		}
 		
 		if (ball_posy == FRAME_HEIGHT) {
 			deathScreen();
+		}
+		
+		if (ball_posy == 0) {
+			score = score +1;
 		}
 	}
 	
@@ -80,7 +101,7 @@ public class Main extends JPanel {
 	public void newGame() {
 		ball.setPOSX(FRAME_WIDTH/2 - ball.getBallWidth()/2);
 		ball.setPOSY(0);
-		ball.setVELX(0);
+		ball.setVELX(1);
 		ball.setVELY(2);
 		
 		bar.setPOSX(FRAME_WIDTH/2 - bar.getBarWidth()/2);
