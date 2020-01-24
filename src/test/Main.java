@@ -29,7 +29,7 @@ public class Main extends JPanel {
 	int bar_left;
 	int bar_right;
 	int bar_height = FRAME_HEIGHT - 50 - ball_width;
-	static public int score = -1;
+	int score = -1;
 	JLabel L;
 	
 	public Main() {
@@ -52,7 +52,7 @@ public class Main extends JPanel {
 		ball_velx = ball.getVELX();
 		ball_vely = ball.getVELY();
 		
-		if (ball_posx == FRAME_WIDTH - ball_width || ball_posx == 0) {
+		if (ball_posx >= FRAME_WIDTH - ball_width || ball_posx <= 0) {
 			ball.setVELX(-ball_velx);
 		}
 		
@@ -60,26 +60,43 @@ public class Main extends JPanel {
 			ball.setVELY(-ball_vely);
 		}
 		
-		if (ball_posy == bar_height && ball_posx >= bar_left + ball_width/4 && ball_posx <= bar_right - ball_width/4 ) {
+		if (ball_posy == bar_height && ball_posx > bar_left + ball_width/4 && ball_posx < bar_right - ball_width/4 ) {
 			ball.setVELY(-ball_vely);
 		}
 		
 		if (ball_velx > 0 && ball_posy == bar_height && ball_posx <= bar_left + ball_width/4 && ball_posx >= bar_left - ball_width) {
-			ball.setVELY(-ball_vely);
-			ball.setVELX(-ball_velx);
+			ball.setVELY(-ball_vely/2);
+			ball.setVELX(-ball_velx*2);
 		}
 		
 		if (ball_velx < 0 && ball_posy == bar_height && ball_posx <= bar_right + ball_width && ball_posx >= bar_right - ball_width/4) {
-			ball.setVELY(-ball_vely);
-			ball.setVELX(-ball_velx);
+			ball.setVELY(-ball_vely/2);
+			ball.setVELX(-ball_velx*2);
 		}
 		
 		if (ball_posy == FRAME_HEIGHT) {
 			deathScreen();
 		}
 		
-		if (ball_posy == 0) {
-			score = score +1;
+		if (ball_posy == bar_height) {
+			score = score + 1;
+			L.setText("Score: " + score);
+		}
+		
+		if (score != 0 && score % 5 == 0 && ball_velx < 0) {
+			ball.setVELX(ball_velx - 1);
+		}
+		
+		if (score != 0 && score % 5 == 0 && ball_velx > 0) {
+			ball.setVELX(ball_velx + 1);
+		}
+		
+		if (score != 0 && score % 5 == 0 && ball_vely > 0) {
+			ball.setVELY(ball_vely + 1);
+		}
+		
+		if (score != 0 && score % 5 == 0 && ball_vely < 0 ) {
+			ball.setVELY(ball_vely - 1);
 		}
 	}
 	
