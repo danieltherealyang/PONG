@@ -15,6 +15,7 @@ public class Main extends JPanel {
 	Ball ball = new Ball(this);
 	Bar bar = new Bar(this);
 	
+	boolean dead = false;
 	static final int FRAME_WIDTH = 600;
 	static final int FRAME_HEIGHT = 600;
 	int ball_posx;
@@ -24,6 +25,7 @@ public class Main extends JPanel {
 	int ball_width = ball.getBallWidth();
 	int ball_height = ball.getBallHeight();
 	
+	int bar_width = bar.getBarWidth();
 	int bar_left;
 	int bar_right;
 	int bar_height = FRAME_HEIGHT - 50 - ball_width;
@@ -51,12 +53,12 @@ public class Main extends JPanel {
 			ball.setVELY(-ball_vely);
 		}
 		
-		//if (ball_posy == bar_height && ball_posx >= bar_left - ball_width/2 && ball_posx <= bar_right + ball_width/2 ) {
-		//	ball.setVELY(-ball_vely);
-		//}
+		if (ball_posy == bar_height && ball_posx >= bar_left + ball_width/2 && ball_posx <= bar_right - ball_width/2 ) {
+			ball.setVELY(-ball_vely);
+		}
 		
-		if (ball_posy == bar_height) {
-			
+		if (ball_posy == FRAME_HEIGHT) {
+			deathScreen();
 		}
 	}
 	
@@ -93,7 +95,6 @@ public class Main extends JPanel {
 		DeathFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		DeathFrame.setVisible(true);
 		JButton restart = new JButton("Restart");
-		
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
@@ -112,6 +113,8 @@ public class Main extends JPanel {
 			main.updateBall();
 			main.repaint();
 			Thread.sleep(10);
+			
+			
 		}
 	}
 }
